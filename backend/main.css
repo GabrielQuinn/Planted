@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+/*
+white: #E3ECD5
+primary text color: #111D13
+secondary text color: #233824
+secondary background color: #8FB996
+primary background color: #A1CCA5
+*/
+
+body {
+    font-family: "Lora", serif;
+    color: #111D13;
+    background-image: linear-gradient(#fcffe0, #ecffc8);
+    margin: 0;
+    padding: 0;
+}
+
+.signup, .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border: 0.1em solid black;
+    border-bottom: 0.3em solid black;
+    border-radius: 0.4em;
+    width: 50vw;*/
+}
+
+.signup form, .login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup div, .login div {
+    font-weight: bold;
+}
+
+input, button {
+    font-family: "Lora", serif;
+    color: #111D13;
+    border: 0.1em solid black;
+    border-bottom: 0.3em solid black;
+    border-radius: 0.4em;
+    font-weight: bold;
+    height: 2em;
+    transition: 0.3s all;
+    margin-bottom: 1em;
+}
+
+input[type=submit], button {
+    background-color: #9dff77;
+    height: 3em;
+}
+
+input[type=submit]:hover, button:hover {
+    background-color: #6fff37;
+    border-bottom: 0.2em solid black;
+}
+
+label {
+    font-weight: bold;
+}
+
+nav {
+    padding: 0.5em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    background-image: linear-gradient(#A1CCA5, #7cbc99);
+    border-bottom: 0.3em solid black;
+}
+
+nav * {
+    width: 10em;
+}
+
+nav span {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section, header {
+    padding: 1em;
+    transition: 0.3s all;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+header ul {
+    margin: 0;
+}
+
+header ul li {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+header ul li:first-child {
+    font-size: 1.6em;
+}
+
+.grid {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.item {
+    height: 4em;
+}
+
+.item5 {
+    grid-column: 1 / span 2;
+}
+
+section h3 {
+    border-bottom: 0.3em solid black;
+    border-radius: 0.2em;
+    width: 5em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer {
+    margin: 0 3em;
+    display: flex;
+    justify-content: center;
+    background-color: #fcffe0;
+    border: 0.1em solid black;
+    border-bottom: 0.3em solid black;
+    border-radius: 0.4em;
+}
