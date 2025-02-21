@@ -1,5 +1,18 @@
 <?php
     session_start();
+
+    include("database.php");
+    $sql = "SELECT * FROM fun_facts";
+    $result = mysqli_query($conn, $sql);
+    $rows = array();
+
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        };
+    }
+
+    $fun_fact = $rows[rand(0, count($rows) - 1)]["text"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +20,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planted</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <nav>
-        <button><img src="" alt="options"></button>
-        <img src="" alt="logo">
+        <span>
+            <h2>Planted</h2>
+            <img src="../img/logo.png" alt="Logo">
+        </span>
         <form action="home.php" method="post" 
         <?php
             if(isset($_SESSION["name"])) {
@@ -27,16 +42,15 @@
         <?php
         if(isset($_SESSION["name"])){
             echo "<h1>Hello, ".$_SESSION["name"]."!</h1>";
-            echo "<ul><li>Streak: {1}</li><li>Average: {100}</li></ul>";
+            echo "<ul class='score_mobile'><li>Lessons Completed:</li><li>0/4</li></ul>";
         }
         else{
             echo"<h1>Welcome to Planted!</h1>";
         }
         ?>
     </header>
-    <section> <!-- CATEGORIES -->
+    <section class="main"> <!-- CATEGORIES -->
         <div class="container">
-            <h3>Learning</h3>
             <form action="home.php" method="post" class="grid" id="grid1">
                 <input type="submit" name="flowers" value="Flowers" class="item item1">
                 <input type="submit" name="trees" value="Trees" class="item item2">
@@ -45,10 +59,20 @@
                 <input type="submit" name="categories" value="All Categories" class="item item5">
             </form>
         </div>
+        <div class="score_desktop">
+            <section class="info">
+                <h3>Completed Lessons</h3>
+                <h4>0/4</h4>
+            </section>
+            <section class="fun_fact"> <!-- FUN FACTS -->
+            <h3>Fun Fact</h3>
+                <p><?php echo$fun_fact?></p>
+            </section>
+        </div>
     </section>
-    <section> <!-- FUN FACTS -->
+    <section class="fun_fact fun_fact_mobile"> <!-- FUN FACTS -->
         <h3>Fun Fact</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum repellat obcaecati provident impedit numquam nam velit, deserunt, tempore earum, asperiores quibusdam temporibus fugit amet aliquam nostrum eius. Quaerat, unde similique.</p>
+        <p><?php echo$fun_fact?></p>
     </section>
     <footer>
         <ul>

@@ -2,9 +2,12 @@
     session_start();
 
     include("database.php");
-    $sql = "SELECT * FROM flower_lessons";
+    if($_SESSION["category"] == "Flowers") $sql = "SELECT * FROM flower_lessons";
+    if($_SESSION["category"] == "Trees") $sql = "SELECT * FROM tree_lessons";
+    if($_SESSION["category"] == "Fungi") $sql = "SELECT * FROM fungi_lessons";
+    if($_SESSION["category"] == "Climate Change") $sql = "SELECT * FROM climate_change_lessons";
     $result = mysqli_query($conn, $sql);
-    $rows = array();
+    $_SESSION["rows"] = array();
 
     if (!isset($_SESSION["lesson_index"])) {
         $_SESSION["lesson_index"] = 0;
@@ -12,12 +15,12 @@
 
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_assoc($result)){
-            $rows[] = $row;
+            $_SESSION["rows"][] = $row;
         };
     }
 
-    $title = $rows[$_SESSION["lesson_index"]]["title"];
-    $para = $rows[$_SESSION["lesson_index"]]["para"];
+    $title = $_SESSION["rows"][$_SESSION["lesson_index"]]["title"];
+    $para = $_SESSION["rows"][$_SESSION["lesson_index"]]["para"];
 
     mysqli_close($conn);
 ?>
@@ -80,5 +83,8 @@
     }
     if(isset($_POST["home"])){
         header("Location: home.php");
+    }
+    if(isset($_POST["lessons"])){
+        header("Location: roadmap.php");
     }
 ?>

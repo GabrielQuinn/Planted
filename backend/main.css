@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 /*
 white: #E3ECD5
@@ -8,54 +9,61 @@ secondary background color: #8FB996
 primary background color: #A1CCA5
 */
 
+:root {
+    --white: #E3FEEB;
+    --yellow: #FAF9A0;
+    --pale_green: #C3D694;
+    --yellow_green: #C3C53D;
+    --olive_green: #91972A;
+    --dark_green: #728F76;
+    --black: #553A41;
+}
+
 body {
-    font-family: "Lora", serif;
-    color: #111D13;
-    background-image: linear-gradient(#fcffe0, #ecffc8);
+    font-family: "Roboto Slab", serif;
+    color: var(--black);
+    background-color: var(--white);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* SIGN UP + LOG IN PAGE */
 
 .signup, .login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*border: 0.1em solid black;
-    border-bottom: 0.3em solid black;
-    border-radius: 0.4em;
-    width: 50vw;*/
 }
 
-.signup form, .login form {
+.signup form, .login form { /* inputs in signup / login */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.signup div, .login div {
+.signup div, .login div { /* "Already have an account?" */
     font-weight: bold;
 }
 
+/* HOME PAGE */
+
 input, button {
-    font-family: "Lora", serif;
-    color: #111D13;
-    border: 0.1em solid black;
-    border-bottom: 0.3em solid black;
-    border-radius: 0.4em;
-    font-weight: bold;
-    height: 2em;
+    font-family: "Roboto Slab", serif;
+    color: var(--black);
+    border: 0;
+    border-radius: 0.7em;
     transition: 0.3s all;
-    margin-bottom: 1em;
 }
 
 input[type=submit], button {
-    background-color: #9dff77;
-    height: 3em;
+    background-color: var(--pale_green);
 }
 
 input[type=submit]:hover, button:hover {
-    background-color: #6fff37;
-    border-bottom: 0.2em solid black;
+    background-color: #d4e6a6;
 }
 
 label {
@@ -63,13 +71,14 @@ label {
 }
 
 nav {
+    width: 90vw;
     padding: 0.5em;
     margin-bottom: 2em;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 1em;
-    background-image: linear-gradient(#A1CCA5, #7cbc99);
-    border-bottom: 0.3em solid black;
 }
 
 nav * {
@@ -81,6 +90,24 @@ nav span {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+nav span h2 {
+    color: var(--olive_green);
+}
+
+nav span img {
+    width: 4em;
+}
+
+nav form {
+    display: flex;
+    justify-content: center;
+}
+
+nav input[type=submit] {
+    width: 7em;
+    height: 3em;
 }
 
 section, header {
@@ -112,6 +139,15 @@ header ul li:first-child {
     font-size: 1.6em;
 }
 
+.score_desktop {
+    display: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
 .grid {
     display: grid;
     gap: 1em;
@@ -119,17 +155,41 @@ header ul li:first-child {
 }
 
 .item {
-    height: 4em;
+    max-height: 20em !important;
+    height: 30vw !important;
+    margin-bottom: 0;
+}
+
+.item1, .item2, .item3, .item4 {
+    width: 40vw;
+    max-width: 20em;
 }
 
 .item5 {
+    height: 10vw !important;
+    max-height: 8em !important;
     grid-column: 1 / span 2;
+    background-color: var(--yellow_green) !important;
 }
 
-section h3 {
-    border-bottom: 0.3em solid black;
-    border-radius: 0.2em;
-    width: 5em;
+.item5:hover {
+    background-color: #d3d549 !important;
+}
+
+.fun_fact_mobile {
+    display: block;
+}
+
+.fun_fact {
+    background-color: #91972A;
+    margin: 0 2em;
+    max-width: 50em;
+    border-radius: 1.2em;
+    text-align: center;
+}
+
+.fun_fact * {
+    color: #FAF9A0;
 }
 
 ul {
@@ -137,12 +197,103 @@ ul {
     padding: 0;
 }
 
+li {
+    padding: 0 1em;
+    text-align: center;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
 footer {
     margin: 0 3em;
     display: flex;
     justify-content: center;
-    background-color: #fcffe0;
-    border: 0.1em solid black;
-    border-bottom: 0.3em solid black;
-    border-radius: 0.4em;
+}
+
+@media (min-width: 750px) {
+    nav {
+      background-color: var(--pale_green);
+      width: 100%;
+    }
+    nav span {
+        margin-left: 2em;
+    }
+    .score_mobile {
+        display: none;
+    }
+    .score_desktop {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h3 {
+        margin: 0;
+    }
+    h4 {
+        font-size: 3em;
+        margin: 0;
+    }
+    .main {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .grid {
+        display: flex;
+        flex-direction: column;
+    }
+    .item {
+        height: 5vw !important;
+        border-radius: 3em;
+    }
+    .item2, .item4 {
+        background-color: var(--olive_green) !important;
+        color: var(--white);
+    }
+    .item3 {
+        background-color: var(--dark_green) !important;
+        color: var(--white);
+    }
+    .item5, .item5:hover {
+        background-color: var(--white) !important;
+        text-decoration: underline;
+        text-decoration-thickness: 0.11em;
+    }
+    .fun_fact_mobile {
+        display: none;
+    }
+    .fun_fact {
+        max-width: 40em;
+    }
+    .fun_fact * {
+        color: var(--black);
+    }
+  }
+
+/* ROADMAP PAGE */
+
+.roadmap {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.roadmap_item {
+    width: 50vw;
+    height: 15vh !important;
+    margin: 0;
+}
+
+.line {
+    margin: 0;
+    height: 3em;
+    width: 0.1em;
+    border-left: 0.3em solid black;
 }
