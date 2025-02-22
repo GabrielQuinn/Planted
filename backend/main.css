@@ -1,13 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-/*
-white: #E3ECD5
-primary text color: #111D13
-secondary text color: #233824
-secondary background color: #8FB996
-primary background color: #A1CCA5
-*/
 
 :root {
     --white: #E3FEEB;
@@ -17,6 +8,7 @@ primary background color: #A1CCA5
     --olive_green: #91972A;
     --dark_green: #728F76;
     --black: #553A41;
+    --red: #C43D3D;
 }
 
 body {
@@ -35,7 +27,8 @@ body {
 .signup, .login {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-top: 4em;
+    gap: 2em;
 }
 
 .signup form, .login form { /* inputs in signup / login */
@@ -44,22 +37,41 @@ body {
     align-items: center;
 }
 
+.signup form label, .login form label { /* inputs in signup / login */
+    margin-bottom: 0.2em;
+}
+
 .signup div, .login div { /* "Already have an account?" */
     font-weight: bold;
 }
 
+.signup form input, .login form input {
+    border: 0.2em solid var(--black);
+    background-color: var(--white);
+    border-radius: 0.7em;
+}
+
+.signup form input[type=submit], .login form input[type=submit] {
+    border: 0em solid var(--black);
+    background-color: var(--olive_green);
+    color: var(--white);
+    width: 10em !important;
+    height: 3em !important;
+}
+
 /* HOME PAGE */
 
-input, button {
+input {
     font-family: "Roboto Slab", serif;
     color: var(--black);
     border: 0;
-    border-radius: 0.7em;
+    border-radius: 0.2em;
     transition: 0.3s all;
 }
 
 input[type=submit], button {
     background-color: var(--pale_green);
+    border-radius: 0.7em;
 }
 
 input[type=submit]:hover, button:hover {
@@ -105,8 +117,8 @@ nav form {
     justify-content: center;
 }
 
-nav input[type=submit] {
-    width: 7em;
+.home_nav input[type=submit] {
+    width: 7em !important;
     height: 3em;
 }
 
@@ -218,6 +230,10 @@ footer {
     nav span {
         margin-left: 2em;
     }
+    nav form input {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
     .score_mobile {
         display: none;
     }
@@ -237,43 +253,138 @@ footer {
     h4 {
         font-size: 3em;
         margin: 0;
+        color: var(--dark_green);
     }
     .main {
         display: flex;
-        width: 100%;
+        width: 80%;
         justify-content: space-around;
+        margin: 0 2em;
+        gap: 2em;
     }
     .grid {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
     .item {
         height: 5vw !important;
         border-radius: 3em;
+        font-size: 1.2em;
     }
-    .item2, .item4 {
+    .item2, .item4, .roadmap .item2, .roadmap .item4 {
         background-color: var(--olive_green) !important;
         color: var(--white);
     }
-    .item3 {
+    .item3, .roadmap .item3 {
         background-color: var(--dark_green) !important;
         color: var(--white);
+    }
+    .item2:hover, .item4:hover, .roadmap .item2:hover, .roadmap .item4:hover {
+        background-color: #b3b940 !important;
+    }
+    .item3:hover, .roadmap .item3:hover {
+        background-color: #85a985 !important;
     }
     .item5, .item5:hover {
         background-color: var(--white) !important;
         text-decoration: underline;
         text-decoration-thickness: 0.11em;
     }
+    .item5:hover {
+        font-size: 1.3em;
+    }
     .fun_fact_mobile {
         display: none;
     }
     .fun_fact {
         max-width: 40em;
+        background-color: var(--yellow_green);
     }
     .fun_fact * {
         color: var(--black);
     }
-  }
+    ul {
+        display: flex;
+        gap: 4em;
+    }
+    li {
+        font-size: 0.8em;
+    }
+}
+
+/* CATEGORIES */
+
+#grid2 {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#grid2 .item3 {
+    grid-column: 2 / span 2;
+}
+
+#grid2 .item4 {
+    grid-row: 2;
+}
+
+/* LESSONS + QUIZ PAGE */
+
+.correct {
+    color: var(--olive_green);
+}
+
+.incorrect {
+    color: var(--red);
+}
+
+.lesson {
+    width: 70%;
+}
+
+.lesson p {
+    margin-bottom: 3em;
+}
+
+.quiz_answer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+
+nav form input {
+    width: 20em !important;
+    height: 3em;
+}
+
+.quiz_input form, .lesson_input form {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+}
+
+.quiz_input form input, .lesson_input form input {
+    width: 10em !important;
+    height: 3em !important;
+    border-radius: 0.7em;
+    background-color: var(--olive_green);
+    color: var(--white);
+    font-size: 1.1em;
+}
+
+.quiz_input form input:hover, .lesson_input form input:hover {
+    background-color: #b3b940;
+}
+
+.quiz_button {
+    background-color: var(--dark_green) !important;
+}
+
+.quiz_button:hover {
+    background-color: #85a985 !important;
+}
 
 /* ROADMAP PAGE */
 
@@ -297,3 +408,18 @@ footer {
     width: 0.1em;
     border-left: 0.3em solid black;
 }
+
+.roadmap input {
+    max-width: 20em;
+}
+/*
+.roadmap .item2, .roadmap .item4 {
+    background-color: var(--olive_green) !important;
+    color: var(--white);
+}
+
+.roadmap .item3 {
+    background-color: var(--dark_green) !important;
+    color: var(--white);
+}
+*/

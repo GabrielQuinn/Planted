@@ -1,31 +1,6 @@
 <?php
     session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planted</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <header>
-        <h1>Log In</h1>
-    </header>
-    <section class="login">
-        <form action="login.php" method="post">
-            <label for="email">Email:</label>
-            <input type="email" name="email">
-            <label for="password">Password:</label>
-            <input type="password" name="password">
-            <input type="submit" name="login" value="Log In">
-        </form>
-        <div>Don't have an account? <a href="signup.php">Click here.</a></div>
-    </section>
-</body>
-</html>
-<?php
+
     if(isset($_POST["login"])){
         if(!empty($_POST["email"]) &&
             !empty($_POST["password"])){
@@ -49,15 +24,15 @@
                     if(password_verify($password, $row["password"])) {
                         $email_found = true;
                         $_SESSION["name"] = $row["name"];
+                        $_SESSION["email"] = $row["email"];
+                        $_SESSION["completed_lessons"] = $row["flowers_complete"] + $row["trees_complete"] + $row["fungi_complete"] + $row["climate_change_complete"];
                         break;
                     }
                 };
             }
-            
-            // $email_found = password_verify($password, $row["password"]);
 
             if($email_found) {
-                header("Location: home.php");
+                header("Location: index.php");
             }
             else {
                 echo "Could not find account";
@@ -68,3 +43,29 @@
         }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planted</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>Log In</h1>
+    </header>
+    <section class="login">
+        <form action="login.php" method="post">
+            <label for="email">Email:</label>
+            <input type="email" name="email">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" name="password">
+            <br>
+            <input type="submit" name="login" value="Log In">
+        </form>
+        <div>Don't have an account? <a href="signup.php">Click here.</a></div>
+    </section>
+</body>
+</html>

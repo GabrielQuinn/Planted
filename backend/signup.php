@@ -1,33 +1,6 @@
 <?php
     session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planted</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <header>
-        <h1>Sign Up</h1>
-    </header>
-    <section class="signup">
-        <form action="signup.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" name="name">
-            <label for="email">Email:</label>
-            <input type="email" name="email">
-            <label for="password">Password:</label>
-            <input type="password" name="password">
-            <input type="submit" name="signup" value="Sign Up">
-        </form>
-        <div>Already have an account? <a href="login.php">Click here.</a></div>
-    </section>
-</body>
-</html>
-<?php
+
     if(isset($_POST["signup"])){
         if(!empty($_POST["name"]) && 
             !empty($_POST["email"]) &&
@@ -73,8 +46,8 @@
 
                 try{
                     mysqli_query($conn, $sql);
-                    echo"all done";
-                    header("Location: home.php");
+                    $_SESSION["completed_lessons"] = 0;
+                    header("Location: index.php");
                 }
                 catch(mysqli_sql_exception){
                     echo"Could not register";
@@ -87,3 +60,32 @@
         }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planted</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>Sign Up</h1>
+    </header>
+    <section class="signup">
+        <form action="signup.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name">
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" name="email">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" name="password">
+            <br>
+            <input type="submit" name="signup" value="Sign Up">
+        </form>
+        <div>Already have an account? <a href="login.php">Click here.</a></div>
+    </section>
+</body>
+</html>

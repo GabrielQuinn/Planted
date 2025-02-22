@@ -2,7 +2,19 @@
     session_start();
 
     include("database.php");
-    $sql = "SELECT * FROM flower_questions";
+    
+    if($_SESSION["category"] == "Flowers") {
+        $table = "flower_questions";
+    } elseif($_SESSION["category"] == "Trees") {
+        $table = "tree_questions";
+    } elseif($_SESSION["category"] == "Fungi") {
+        $table = "fungi_questions";
+    } else {
+        $table = "climate_change_questions";
+    }
+
+    $sql = "SELECT * FROM {$table}";
+
     $result = mysqli_query($conn, $sql);
     $rows = array();
 
@@ -27,7 +39,20 @@
 
     mysqli_close($conn);
 
-    $completed = false;
+    if (!isset($_SESSION["completed"])) {
+        $_SESSION["completed"] = false;
+    }
+
+    if(isset($_POST["lesson"])){
+        header("Location: lesson.php");
+    }
+    if(isset($_POST["next"])){
+        if($_SESSION["quiz_index"] < 3) {
+            $_SESSION["quiz_index"] = $_SESSION["quiz_index"] + 1;
+            $_SESSION["completed"] = false;
+            header("Location: quiz.php");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +72,27 @@
             <input type="submit" name="questions" value="View All Questions">
         </form>
     </nav>
-    <section>
+    <section class="quiz_answer">
         <h1>Category - <?php echo$_SESSION["category"] ?></h1>
         <h2>True or False:</h2>
         <p><?php
             echo$question;
         ?></p>
+        <?php
+        if((isset($_POST["true"]) || isset($_POST["false"]))){
+            if($_SESSION["completed"] == false) {
+                $_SESSION["completed"] = true;
+                if(($answer == 1 && isset($_POST["true"])) || ($answer == 0 && isset($_POST["false"]))) {
+                    // CORRECT!!!!!!!!!!
+                    echo"<h3 class='correct'>Correct</h3>";
+                }
+                else {
+                    // INCORRECT!!!!!!!!!!!
+                    echo"<h3 class='incorrect'>Incorrect</h3>";
+                }
+            }
+        }
+        ?>
         <p>
             <?php 
                 if((isset($_POST["true"]) || isset($_POST["false"]))) {
@@ -60,10 +100,20 @@
                 }
             ?>
         </p>
-        <section>
+        <section class="quiz_input">
             <form action="quiz.php" method="post">
-                <input type="submit" name="true" value="True">
-                <input type="submit" name="false" value="False">
+                <input type="submit" name="true" value="True"
+                <?php 
+                    if((isset($_POST["true"]) || isset($_POST["false"]))) {
+                        echo' style="display:none"';
+                    }
+                ?>>
+                <input type="submit" name="false" value="False"
+                <?php 
+                    if((isset($_POST["true"]) || isset($_POST["false"]))) {
+                        echo' style="display:none"';
+                    }
+                ?>>
                 <?php 
                     if((isset($_POST["true"]) || isset($_POST["false"])) && $_SESSION["quiz_index"] < 3) {
                         echo'<input type="submit" name="next" value="Next Question">';
@@ -74,25 +124,3 @@
     </section>
 </body>
 </html>
-<?php
-    if(isset($_POST["true"]) || isset($_POST["true"]) && $completed == false){
-        $completed = true;
-        if(($answer == 1 && isset($_POST["true"])) || ($answer == 0 && isset($_POST["false"]))) {
-            // CORRECT!!!!!!!!!!
-            echo"CORRECT";
-        }
-        else {
-            // INCORRECT!!!!!!!!!!!
-            echo"INCORRECT";
-        }
-    }
-    if(isset($_POST["lesson"])){
-        header("Location: lesson.php");
-    }
-    if(isset($_POST["next"])){
-        if($_SESSION["quiz_index"] < 3) {
-            $_SESSION["quiz_index"] = $_SESSION["quiz_index"] + 1;
-            header("Location: quiz.php");
-        }
-    }
-?>
